@@ -1,0 +1,156 @@
+<app-a-nav></app-a-nav>
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Admin Restaurant Actions</h1>
+
+  <!-- Action Buttons -->
+  <div class="d-flex justify-content-center mb-4">
+    <button class="btn btn-primary mx-2" style="background-color: #ff4500;" (click)="setAction('create')">
+      Add Restaurant
+    </button>
+    <button class="btn btn-primary mx-2" style="background-color: #ff4500;" (click)="setAction('update')">
+      Update Restaurant
+    </button>
+    <button class="btn btn-primary mx-2" style="background-color: #ff4500;" (click)="setAction('delete')">
+      Delete Restaurant
+    </button>
+    <button class="btn btn-primary mx-2" style="background-color: #ff4500;" (click)="getAll()">
+      Get All Restaurants
+    </button>
+    
+  </div>
+
+  <!-- Conditional Form -->
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <!-- Create / Update Form -->
+      <div *ngIf="actionType === 'create'">
+        <h2 class="text-center mb-3">
+          {{ actionType === 'create' ? 'Add Restaurant' : 'Update Restaurant' }}
+        </h2>
+        <form (submit)="handleSubmit($event)">
+          <div class="mb-3">
+            <label for="name" class="form-label">Restaurant Name:</label>
+            <input type="text" id="name" [(ngModel)]="name" name="name" class="form-control" required/>
+          </div>
+
+          <div class="mb-3">
+            <label for="imageUrl" class="form-label">Image URL:</label>
+            <input type="text" id="imageUrl" [(ngModel)]="imageUrl" name="imageUrl" class="form-control"/>
+          </div>
+
+          <div *ngIf="imageUrl" class="mb-3 text-center">
+            <img [src]="imageUrl" alt="Restaurant Image" class="img-fluid" style="max-width: 100%; height: auto;"/>
+          </div>
+
+          <div class="mb-3">
+            <label for="location" class="form-label">Location:</label>
+            <input type="text" id="location" [(ngModel)]="location" name="location" class="form-control" required/>
+          </div>
+
+          <div class="mb-3">
+            <label for="cuisineType" class="form-label">Cuisine Type:</label>
+            <input type="text" id="cuisineType" [(ngModel)]="cuisineType" name="cuisineType" class="form-control" required/>
+          </div>
+
+          <div class="mb-3">
+            <label for="rating" class="form-label">Rating (1 to 5):</label>
+            <input type="number" id="rating" [(ngModel)]="rating" name="rating" class="form-control" min="1" max="5"/>
+          </div>
+
+          <button type="submit" class="btn w-100" style="background-color: #ff4500; color: white;">
+            {{ actionType === 'create' ? 'Add Restaurant' : 'Update Restaurant' }}
+          </button>
+        </form>
+      </div>
+
+      <div *ngIf="actionType === 'update'">
+        <h2 class="text-center mb-3">Update Restaurant</h2>
+        <form (submit)="handleSubmit($event)">
+          <div class="mb-3">
+            <label for="restaurantId" class="form-label">Restaurant ID:</label>
+            <input type="number" id="restaurantId" [(ngModel)]="restaurantId" name="restaurantId" class="form-control" required/>
+          </div>
+      
+          <div class="mb-3">
+            <label for="name" class="form-label">Restaurant Name:</label>
+            <input type="text" id="name" [(ngModel)]="name" name="name" class="form-control" required/>
+          </div>
+      
+          <div class="mb-3">
+            <label for="imageUrl" class="form-label">Image URL:</label>
+            <input type="text" id="imageUrl" [(ngModel)]="imageUrl" name="imageUrl" class="form-control"/>
+          </div>
+      
+          <div *ngIf="imageUrl" class="mb-3 text-center">
+            <img [src]="imageUrl" alt="Restaurant Image" class="img-fluid" style="max-width: 100%; height: auto;"/>
+          </div>
+      
+          <div class="mb-3">
+            <label for="location" class="form-label">Location:</label>
+            <input type="text" id="location" [(ngModel)]="location" name="location" class="form-control" required/>
+          </div>
+      
+          <div class="mb-3">
+            <label for="cuisineType" class="form-label">Cuisine Type:</label>
+            <input type="text" id="cuisineType" [(ngModel)]="cuisineType" name="cuisineType" class="form-control" required/>
+          </div>
+      
+          <div class="mb-3">
+            <label for="rating" class="form-label">Rating (1 to 5):</label>
+            <input type="number" id="rating" [(ngModel)]="rating" name="rating" class="form-control" min="1" max="5"/>
+          </div>
+      
+          <button type="submit" class="btn w-100" style="background-color: #ff4500; color: white;">Update Restaurant</button>
+        </form>
+      </div>
+      
+      <!-- Delete Restaurant -->
+      <div *ngIf="actionType === 'delete'" class="text-center mt-4">
+        <p>Select a restaurant to delete by entering its details and clicking Submit</p>
+        <form (submit)="handleSubmit($event)">
+          <div class="mb-3">
+            <label for="restaurantId" class="form-label">Restaurant ID:</label>
+            <input type="text" id="restaurantId" [(ngModel)]="restaurantId" name="restaurantId" class="form-control" required/>
+          </div>
+          <button type="submit" class="btn w-100" style="background-color: #ff4500; color: white;">
+            Delete Restaurant
+          </button>
+        </form>
+      </div>
+
+
+      <div class="container mt-5 menu-items-container" *ngIf="actionType === 'getAll'">
+        <h2 class="text-center mb-4">All Restaurants</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4"> <!-- Bootstrap Grid -->
+          <div class="col" *ngFor="let restaurant of restaurants">
+            <div class="card h-100 shadow-sm"> <!-- Bootstrap Card -->
+              <img *ngIf="restaurant.imageUrl" [src]="restaurant.imageUrl" alt="{{ restaurant.name }}" class="card-img-top">
+              <div class="card-body text-center">
+                <h5 class="card-title text-primary fw-bold">{{ restaurant.name }}</h5>
+                <p class="card-text text-muted">{{ restaurant.location }}</p>
+                <p class="card-text fw-bold">Cuisine: {{ restaurant.cuisineType }}</p>
+                <p class="card-text text-danger fw-bold">Rating: ⭐ {{ restaurant.rating }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <p *ngIf="restaurantsLoaded && restaurants.length === 0" class="text-center text-danger mt-4">
+          No restaurants found.
+        </p>
+      </div>
+      
+
+      
+      
+      <!-- Message Display -->
+      <div class="alert alert-info mt-3" *ngIf="message">
+        {{ message }}
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+
+<app-footer></app-footer>

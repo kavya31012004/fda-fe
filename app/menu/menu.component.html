@@ -1,0 +1,52 @@
+<app-c-nav></app-c-nav>
+    <br><br>
+  
+    <div *ngIf="menuData.length > 0; else noMenu">
+      <div class="row">
+        <div class="col-md-4" *ngFor="let item of menuData">
+          <div class="card shadow-sm mb-4">
+            <!-- Image of the Menu Item -->
+            <img 
+              [src]="item.imageUrl" 
+              class="card-img-top" 
+              alt="{{ item.name }}"
+            />
+            <div class="card-body">
+              <!-- Menu Item Name -->
+              <h5 class="card-title" style="color: #ff4500; font-weight: bold;">{{ item.name }}</h5>
+              
+              <!-- Menu Item Description -->
+              <p class="card-text" style="color: #555;">
+                <strong>Description:</strong> {{ item.description }}
+              </p>
+              
+              <!-- Menu Item Price -->
+              <p class="card-text" style="color: #333;">
+                <strong>Price:</strong> ₹{{ item.price }}
+              </p>
+              
+              <!-- Add to Cart Button -->
+              <button 
+    class="btn btn-primary w-100" 
+    style="background-color: #ff4500; border: none; font-weight: bold; font-size: 1rem; padding: 10px; border-radius: 5px;"
+    (click)="redirectToCart(item)"
+    
+>
+    🛒 Add to Cart
+</button>
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noMenu>
+      <p class="text-center text-danger">No menu items available for this restaurant.</p>
+    </ng-template>
+
+  
+
+  <app-footer></app-footer>

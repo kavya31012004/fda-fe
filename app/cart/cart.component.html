@@ -1,0 +1,77 @@
+<app-c-nav></app-c-nav>
+<br>
+<div class="container">
+  
+  <!-- Order Summary Section (Displayed After Placing Order) -->
+  <div *ngIf="orderPlaced">
+    <h3>Order Summary</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of orderSummary.menuItems">
+          <td>{{ item.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>₹{{ item.price }}</td>
+          <td>₹{{ item.price * item.quantity }}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3"><strong>Grand Total:</strong></td>
+          <td><strong>₹{{ orderSummary.totalAmount }}</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- Cart Section (Hidden After Placing Order) -->
+  <div *ngIf="!orderPlaced">
+    <h2 class="mt-4">Cart</h2>
+    <div *ngIf="cartItems.length > 0; else noItem">
+      <div class="card mt-4" *ngFor="let item of cartItems; let i = index">
+        <div class="row g-0 align-items-center">
+          <div class="col-md-4">
+            <img [src]="item.imageUrl" alt="Item Image" class="img-fluid rounded-start">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="card-text"><strong>Restaurant:</strong> {{ item.restaurantId }}</p>
+              <p class="card-text"><strong>Price:</strong> ₹{{ item.price }}</p>
+              <p class="card-text"><strong>Total:</strong> ₹{{ item.price * item.quantity }}</p>
+
+              <!-- Quantity Control Buttons -->
+              <div class="d-flex align-items-center">
+                <button class="btn btn-danger btn-sm me-2" (click)="decrementQuantity(i)">-</button>
+                <span>{{ item.quantity }}</span>
+                <button class="btn btn-success btn-sm ms-2" (click)="incrementQuantity(i)">+</button>
+              </div>
+
+              <button class="btn btn-warning mt-3" (click)="removeFromCart(i)">Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Place Order Button -->
+      <div class="text-center mt-4">
+        <button class="btn btn-primary btn-lg" (click)="placeOrder()" style="background-color: #ff4500;">Place Order</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noItem>
+    <p class="mt-4 text-center">Your cart is empty.</p>
+  </ng-template>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br>
+
+<app-footer></app-footer>

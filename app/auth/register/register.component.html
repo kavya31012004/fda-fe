@@ -1,0 +1,103 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #ff4500;">
+    <div class="container">
+      <a class="navbar-brand" href="#" style="font-family: 'Arial', sans-serif; font-size: 2rem; font-weight: bold; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); ">
+        buskEt 🍴
+      </a>
+      <button 
+        class="navbar-toggler" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#navbarNav" 
+        aria-controls="navbarNav" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+         
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="/home/login">Login</a>
+          </li>
+          
+         
+        </ul>
+      </div>
+    </div>
+  </nav>
+<div class="register container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h1>Sign up</h1>
+        <div class="form-control">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput type="name" formControlName="name">
+            </mat-form-field>
+            @if(isNameInvalid){
+                <p class="form-control-error">Name is invalid</p>
+            }
+        </div>
+        <div class="form-control">
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="email" email>
+            </mat-form-field>
+            @if(isEmailInvalid){
+                <p class="form-control-error">Email is invalid</p>
+            }
+        </div>
+
+        <div class="form-control">
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password"/>
+            </mat-form-field>
+            @if(isPasswordInvalid){
+                <p class="form-control-error">Password is invalid</p>
+            }
+        </div>
+
+        <div class="form-control">
+            <mat-form-field>
+                <mat-label>Role</mat-label>
+                <mat-select matNativeControl formControlName="role">
+                  <mat-option style="background-color: #fda180;"value="USER">User</mat-option>
+                  <mat-option style="background-color: #fda180;"value="ADMIN">Admin</mat-option>
+                  <mat-option style="background-color: #fda180;"value="AGENT">Agent</mat-option>
+                </mat-select>
+            </mat-form-field>
+            @if(isRoleInvalid){
+                <p class="form-control-error">Role is invalid</p>
+            }
+        </div>
+
+        <div class="form-control">
+            <mat-form-field>
+                <mat-label>Phone</mat-label>
+                <input matInput type="number" formControlName="phone"/>
+            </mat-form-field>
+            @if(isPhoneInvalid){
+                <p class="form-control-error">Phone number is invalid</p>
+            }
+        </div>
+        
+        <div class="form-control">
+            <mat-form-field>
+                <mat-label>Address</mat-label>
+                <input matInput type="text" formControlName="address">
+            </mat-form-field>
+            @if(isAddressInvalid){
+                <p class="form-control-error">Address is invalid</p>
+            }
+        </div>
+    
+        <button type="submit" class="btn btn-login" style="background-color: #ff4500;">
+            Register
+            @if (isLoading()) {
+                <mat-progress-spinner mode="indeterminate" diameter="15"></mat-progress-spinner>
+            }
+        </button>
+    </form>
+</div>
+<app-footer></app-footer>

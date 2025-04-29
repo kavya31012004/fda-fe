@@ -1,0 +1,113 @@
+<app-c-nav></app-c-nav>
+    <br>
+  <div>
+    <!-- Filters and Search -->
+    <div class="container mt-4">
+      <div class="row align-items-center">
+        <!-- Filter Dropdown -->
+        <div class="col-md-4">
+          <select 
+            [(ngModel)]="selectedCuisine" 
+            (change)="filterByCuisine()" 
+            class="form-select"
+          >
+            <option value="">All Cuisines</option>
+            <option value="Indian">Indian</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Italian">Italian</option>
+            <!-- Add more cuisine types -->
+          </select>
+        </div>
+  
+        <!-- Rating Dropdown -->
+        <div class="col-md-4">
+          <select 
+            (change)="filterByRating($event)" 
+            class="form-select"
+          >
+            <option value="">All Ratings</option>
+            <option value="1">1 and above</option>
+            <option value="2">2 and above</option>
+            <option value="3">3 and above</option>
+            <option value="4">4 and above</option>
+            <option value="5">5 only</option>
+          </select>
+        </div>
+  
+        <!-- Search Input -->
+        <div class="col-md-4">
+          <div class="input-group">
+            <!-- Search Input Field -->
+            <input 
+              type="text" 
+              [(ngModel)]="searchQuery" 
+              placeholder="Search by Name" 
+              class="form-control"
+            />
+            <!-- Search Icon -->
+            <button 
+              class="btn btn-outline-secondary" 
+              type="button" 
+              (click)="searchByName()"
+            >
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  
+    <!-- Content -->
+    <div *ngIf="filteredRestaurants.length === 0 && noResultsMessage" class="no-results-message">
+      <p>{{ noResultsMessage }}</p>
+    </div>
+    
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-4 mb-4" *ngFor="let restaurant of filteredRestaurants; let i = index" [hidden]="i >= 9">
+          <div class="card shadow-sm">
+            <img 
+              [src]="restaurant.imageUrl" 
+              class="card-img-top" 
+              alt="{{ restaurant.name }}"
+            >
+            <div class="card-body">
+             <!-- <p class="card-text">
+                <strong>Restaurant Id :</strong> {{ restaurant.restaurantId }}
+              </p> -->
+              <h5 class="card-title" style="font-family: 'Verdana', sans-serif; color: #ff4500; font-size: 1.5rem;">
+                {{ restaurant.name }}
+              </h5>
+              <p class="card-text" style="font-family: 'Arial', sans-serif; color: #555; font-size: 1rem;">
+                <strong>Cuisine:</strong> {{ restaurant.cuisineType }}
+              </p>
+              <p class="card-text" style="font-family: 'Arial', sans-serif; color: #555; font-size: 1rem;">
+                <strong>Rating : {{restaurant.rating}}</strong>&nbsp; 
+                <span *ngFor="let star of [1, 2, 3, 4, 5]">
+                  <i 
+                    class="fa" 
+                    [ngClass]="{
+                      'fa-star': star <= restaurant.rating, 
+                      'fa-star-o': star > restaurant.rating
+                    }" 
+                    style="color: #ffcc00;"
+                  ></i>
+                </span>
+              </p>
+              
+              <button 
+                class="btn btn-primary"
+                [routerLink]="'menu/' + restaurant.restaurantId"
+                style="background-color: #ff4500; border: none; font-weight: bold; font-size: 1rem;"
+              >
+                View Menu
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <app-footer></app-footer>
+  </div>
+  

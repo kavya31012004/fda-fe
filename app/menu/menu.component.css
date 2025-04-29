@@ -1,0 +1,75 @@
+/* Row styling for cards */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adds space between cards */
+    justify-content: center; /* Ensures cards are centered */
+  }
+  
+  /* Ensure cards stretch evenly and maintain consistent size */
+  .col-md-4 {
+    flex: 0 0 calc(33.333% - 20px); /* Ensures three cards per row with gap accounted for */
+    max-width: calc(33.333% - 20px); /* Consistent width */
+    box-sizing: border-box; /* Includes padding and border in the width */
+  }
+  
+  /* Card styling for proportions */
+  .card {
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
+    background-color: #ffffff;
+    height: auto; /* Allows flexible height */
+    overflow: hidden;
+    padding: 10px; /* Adds padding inside the card */
+    margin: auto; /* Centers the card horizontally */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .card:hover {
+    transform: scale(1.05); /* Zoom effect on hover */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+  }
+  
+  /* Image styling for consistent scaling */
+  .card-img-top {
+    width: 100%;
+    height: 200px; /* Ensures consistent height across cards */
+    object-fit: cover; /* Ensures proportional cropping and scaling */
+    border-radius: 5px; /* Adds rounded corners to the image */
+  }
+  
+  /* Card title styling */
+  .card-title {
+    font-family: 'Verdana', sans-serif;
+    font-size: 1.4rem; /* Slightly smaller font */
+    color: #ff4500;
+    margin-bottom: 10px; /* Reduced spacing */
+  }
+  
+  /* Card text styling */
+  .card-text {
+    font-family: 'Arial', sans-serif;
+    color: #555;
+    font-size: 0.9rem; /* Compact text size */
+    margin-bottom: 8px; /* Reduced spacing */
+  }
+  
+  /* Button styling */
+  .btn-primary {
+    background: linear-gradient(to right, #ff4500, #ff7b00); /* Adds gradient */
+    border: 2px solid #ff4500; /* Includes a visible border */
+    font-weight: bold;
+    font-size: 1rem; /* Slightly larger font */
+    color: #fff; /* Button text color */
+    padding: 8px 15px; /* Enhanced padding */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Hover effect */
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(to right, #e63e00, #e65d00); /* Adjusted gradient */
+    border-color: #e63e00; /* Hover border color */
+    color: #fff; /* Ensures text remains readable */
+  }
+  
+  

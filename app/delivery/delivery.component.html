@@ -1,0 +1,48 @@
+ 
+  <app-ag-nav></app-ag-nav>
+  <div class="container mt-3">
+    <div>
+      <label for="agentId">Agent ID:</label>&nbsp;
+      <input type="number" id="agentId" [(ngModel)]="agentId">&nbsp;&nbsp;
+      <button (click)="loadDeliveries()" class="getdeliveries">Get Deliveries</button>
+    </div>
+  
+    <div *ngIf="errorMessage" class="error-message mt-2">
+      {{ errorMessage }}
+    </div>
+  
+    <div *ngIf="deliveries.length > 0" class="mt-3">
+      <h3>Deliveries for Agent ID: {{ agentId }}</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Delivery ID</th>
+            <th>Order ID</th>
+            <th>Agent ID</th>
+            <th>Estimated Arrival Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let delivery of deliveries">
+            <td>{{ delivery.deliveryId }}</td>
+            <td>{{ delivery.orderId }}</td>
+            <td>{{ delivery.agentId }}</td>
+            <td>{{ delivery.estimatedTimeOfArrival }}</td>
+            <td>{{ delivery.status }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" (click)="updateToInProgress(delivery.deliveryId)" [disabled]="delivery.status === 'INPROGRESS' || delivery.status === 'DELIVERED'">In Progress</button>
+              <button class="btn btn-success btn-sm ml-1" (click)="updateToDelivered(delivery.deliveryId)" [disabled]="delivery.status === 'DELIVERED'">Delivered</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div *ngIf="deliveries.length === 0 && !errorMessage && agentId !== null && hasSearched">
+      <p>No deliveries found for Agent ID: {{ agentId }}</p>
+    </div>
+  </div>
+  
+  <app-footer></app-footer>

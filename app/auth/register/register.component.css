@@ -1,0 +1,85 @@
+div.register.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Vertically centers the form */
+    background-color: #f5f5f5; /* Light gray background for a modern look */
+    font-family: 'Arial', sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 450px; /* Restricts form width for larger screens */
+    background: #fff; /* White form background for better contrast */
+    padding: 2rem; /* Adds spacious padding */
+    border-radius: 12px; /* Rounded corners for a modern feel */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Adds subtle shadow for depth */
+}
+
+h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2c3e50; /* Deep gray for readability */
+    margin-bottom: 1.5rem; /* Adds spacing below heading */
+    text-align: center; /* Centers the heading */
+}
+
+div.form-control {
+    margin-bottom: 1.5rem; /* Adds space between fields */
+    width: 100%; /* Fields take the full form width */
+}
+
+mat-form-field {
+    width: 100%; /* Ensures all input fields match form width */
+}
+
+p.form-control-error {
+    margin: 4px 0 0 0; /* Keeps error text close to the input field */
+    font-size: 0.85rem; /* Slightly smaller font for error messages */
+    color: #e74c3c; /* Bright red color for better visibility */
+    font-weight: bold; /* Makes error text stand out */
+}
+
+button {
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem; /* Spacious button size */
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3498db; /* Vibrant blue for CTA (Call-to-Action) */
+    border: none;
+    border-radius: 8px; /* Rounded corners for modern feel */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9; /* Slightly darker blue on hover */
+}
+
+button:disabled {
+    background-color: #bdc3c7; /* Gray color for disabled state */
+    cursor: not-allowed;
+}
+
+mat-progress-spinner {
+    margin-left: 10px; /* Adds spacing between text and spinner */
+}
+
+@media (max-width: 768px) {
+    form {
+        padding: 1.5rem; /* Adjusts padding for smaller screens */
+        max-width: 90%; /* Ensures the form fits within smaller screens */
+    }
+
+    h1 {
+        font-size: 1.5rem; /* Adjusts heading size for smaller devices */
+    }
+
+    button {
+        font-size: 0.9rem; /* Adjusts button font size for smaller devices */
+        padding: 0.7rem 1.2rem;
+    }
+}

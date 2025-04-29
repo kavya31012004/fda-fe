@@ -1,0 +1,169 @@
+/* Row styling for cards */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adds space between cards */
+    justify-content: center; /* Ensures cards are centered */
+  }
+  
+  /* Ensure cards stretch evenly and maintain consistent size */
+  .col-md-4 {
+    flex: 0 0 calc(33.333% - 20px); /* Ensures three cards per row with gap accounted for */
+    max-width: calc(33.333% - 20px); /* Consistent width */
+    box-sizing: border-box; /* Includes padding and border in the width */
+  }
+  
+  /* Card styling for proportions */
+  .card {
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
+    background-color: #ffffff;
+    height: auto; /* Allows flexible height */
+    overflow: hidden;
+    padding: 10px; /* Adds padding inside the card */
+    margin: auto; /* Centers the card horizontally */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .card:hover {
+    transform: scale(1.05); /* Zoom effect on hover */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+  }
+  
+  /* Image styling for consistent scaling */
+  .card-img-top {
+    width: 100%;
+    height: 200px; /* Ensures consistent height across cards */
+    object-fit: cover; /* Ensures proportional cropping and scaling */
+    border-radius: 5px; /* Adds rounded corners to the image */
+  }
+  
+  /* Card title styling */
+  .card-title {
+    font-family: 'Verdana', sans-serif;
+    font-size: 1.4rem; /* Slightly smaller font */
+    color: #ff4500;
+    margin-bottom: 10px; /* Reduced spacing */
+  }
+  
+  /* Card text styling */
+  .card-text {
+    font-family: 'Arial', sans-serif;
+    color: #555;
+    font-size: 0.9rem; /* Compact text size */
+    margin-bottom: 8px; /* Reduced spacing */
+  }
+  
+  /* Button styling */
+  .btn-primary {
+    background: linear-gradient(to right, #ff4500, #ff7b00); /* Adds gradient */
+    border: 2px solid #ff4500; /* Includes a visible border */
+    font-weight: bold;
+    font-size: 1rem; /* Slightly larger font */
+    color: #fff; /* Button text color */
+    padding: 8px 15px; /* Enhanced padding */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Hover effect */
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(to right, #e63e00, #e65d00); /* Adjusted gradient */
+    border-color: #e63e00; /* Hover border color */
+    color: #fff; /* Ensures text remains readable */
+  }
+  
+  /* Footer styling */
+  footer p {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem; /* Compact text */
+    color: #fff;
+  }
+  
+  /* Filter and Search alignment */
+  .filter-container {
+    display: flex; /* Inline layout for filter and search */
+    justify-content: space-between; /* Align filter to left, search to right */
+    align-items: center; /* Vertically center both elements */
+    margin-bottom: 20px; /* Space below the row */
+  }
+  
+  .filter-container select {
+    width: 45%; /* Dropdown occupies 45% of the row */
+    font-size: 1rem;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .filter-container input {
+    width: 45%; /* Search input occupies 45% of the row */
+    font-size: 1rem;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Responsive adjustments for cards */
+  @media (max-width: 768px) {
+    .col-md-4 {
+      flex: 0 0 calc(50% - 20px); /* Two cards per row on medium screens */
+      max-width: calc(50% - 20px);
+    }
+  
+    .filter-container {
+      flex-direction: column; /* Stack filter and search vertically */
+      gap: 15px; /* Add space between stacked elements */
+    }
+  
+    .filter-container select,
+    .filter-container input {
+      width: 100%; /* Full width for smaller screens */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .col-md-4 {
+      flex: 0 0 100%; /* Single card per row on small screens */
+      max-width: 100%;
+    }
+  }
+  
+  .no-results-message {
+    text-align: center; /* Center-aligns the text */
+    color: #d9534f; /* A soft red color for warning */
+    font-family: 'Arial', sans-serif; /* Clean font */
+    font-size: 1.2rem; /* Slightly larger text */
+    background-color: #ffe6e6; /* Light red background for contrast */
+    border: 1px solid #d9534f; /* Red border for emphasis */
+    border-radius: 8px; /* Rounds the corners */
+    padding: 10px 20px; /* Adds spacing inside the box */
+    margin-top: 20px; /* Adds spacing above the message */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    animation: fadeIn 0.5s ease; /* Smooth fade-in effect */
+  }
+  
+  /* Add a fade-in effect */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px); /* Slight upward movement */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0); /* Reset to the original position */
+    }
+  }
+  
+  .input-group .form-control {
+    border-radius: 0.5rem 0 0 0.5rem; /* Rounded corners for the input */
+  }
+  
+  .input-group .btn {
+    border-radius: 0 0.5rem 0.5rem 0; /* Rounded corners for the button */
+  }
+  
+  .input-group .fa-search {
+    font-size: 1.2rem; /* Enlarges the icon */
+    color: #ff4500; /* Adds your theme color */
+  }
+  

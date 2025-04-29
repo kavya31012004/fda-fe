@@ -1,0 +1,120 @@
+<app-a-nav></app-a-nav>
+  
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Admin Restaurant Actions</h1>
+ 
+  <!-- Action Buttons -->
+  <div class="d-flex justify-content-center mb-4">
+    <button class="btn btn-primary mx-2" style="background-color: #ff4500;" (click)="setAction('add')">Add Item</button>
+    <button class="btn btn-primary mx-2" style="background-color: #ff4500;" (click)="setAction('update')">Update Item</button>
+    <button class="btn btn-primary mx-2" style="background-color: #ff4500;" (click)="setAction('delete')">Delete Item</button>
+         <!-- Get All Items Button -->
+ 
+  <button class="btn btn-primary mx-2" style="background-color: #ff4500;" (click)="showRestaurantInput()">
+    Get All Items
+  </button>
+ 
+  </div>
+ 
+  <!-- Conditional Form -->
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div *ngIf="actionType === 'add' || actionType === 'update'">
+        <h2 class="text-center mb-3">{{ actionType === 'add' ? 'Add Menu Item' : 'Update Menu Item' }}</h2>
+        <form (submit)="handleSubmit($event)">
+          <div class="mb-3">
+            <label for="restaurantId" class="form-label">Restaurant ID:</label>
+            <input type="text" id="restaurantId" [(ngModel)]="restaurantId" name="restaurantId" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Menu Name:</label>
+            <input type="text" id="name" [(ngModel)]="name" name="name" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <textarea id="description" [(ngModel)]="description" name="description" rows="4" class="form-control"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="price" class="form-label">Price:</label>
+            <input type="text" id="price" [(ngModel)]="price" name="price" class="form-control" />
+          </div>
+          <div class="mb-3" *ngIf="actionType === 'add' || actionType === 'update'">
+            <label for="file" class="form-label">Image:</label>
+            <input type="file" id="file" (change)="handleImageChange($event)" class="form-control" accept="image/*" />
+            <div *ngIf="imageUrl" class="mt-3">
+              <img [src]="imageUrl" alt="Preview" class="img-thumbnail" />
+            </div>
+          </div>
+          <button type="submit" class="btn w-100" style="background-color: #ff4500; color: white;">
+            {{ actionType === 'add' ? 'Add Menu Item' : 'Update Menu Item' }}
+          </button>
+        </form>
+      </div>
+ 
+      <div *ngIf="actionType === 'delete'" class="text-center mt-4">
+        <p>Select an item to delete by entering its details and clicking Submit</p>
+        <form (submit)="handleSubmit($event)">
+          <div class="mb-3">
+            <label for="restaurantId" class="form-label">Restaurant ID</label>
+            <input type="text" id="restaurantId" [(ngModel)]="restaurantId" name="restaurantId" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Menu Name:</label>
+            <input type="text" id="name" [(ngModel)]="name" name="name" class="form-control" required />
+          </div>
+          <button type="submit" class="btn w-100" style="background-color: #ff4500; color: white;">Delete Menu Item</button>
+        </form>
+      </div>
+ 
+ 
+ 
+<!-- Restaurant ID Input (Initially Hidden) -->
+<div *ngIf="showInputField" class="container mt-5">
+  <h2 class="text-center mb-4">Enter Restaurant ID to View Menu Items</h2>
+  <form (submit)="fetchMenuItems($event)">
+    <div class="mb-3">
+      <label for="restaurantId" class="form-label">Restaurant ID:</label>
+      <input type="text" id="restaurantId" [(ngModel)]="restaurantId" name="restaurantId" class="form-control" required />
+    </div>
+    <button type="submit" class="btn w-100" style="background-color: #ff4500; color: white;">Fetch Menu Items</button>
+  </form>
+</div>
+<div class="container mt-5 menu-items-container" *ngIf="showMenuItems">
+  <h2 class="text-center mb-4">Menu Items</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4"> <!-- Bootstrap Grid -->
+    <div class="col" *ngFor="let item of menuItems">
+      <div class="card h-100 shadow-sm"> <!-- Bootstrap Card -->
+        <img *ngIf="item.imageUrl" [src]="item.imageUrl" alt="{{ item.name }}" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title text-primary fw-bold">{{ item.name }}</h5>
+          <p class="card-text text-muted">{{ item.description }}</p>
+          <p class="card-text text-danger fw-bold">₹{{ item.price }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p *ngIf="menuLoaded && menuItems.length === 0" class="text-center text-danger mt-4">
+    No items found.
+  </p>
+  
+</div>
+  
+  
+  
+ 
+
+ 
+ 
+ 
+      <!-- Message Display -->
+      <div class="alert alert-info mt-3" *ngIf="message">
+        {{ message }}
+      </div>
+    </div>
+  </div>
+
+ 
+
+  <br /><br /><br />
+  <app-footer></app-footer>

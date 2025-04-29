@@ -1,0 +1,32 @@
+<nav id="navbar">
+  <a routerLink="home" routerLinkActive="active-route">Home</a>
+ 
+  <div class="side-nav">
+    <!-- If no user is logged in -->
+    
+      <a routerLink="login" routerLinkActive="active-route">Login</a>
+      <a routerLink="register" class="btn btn-register">Register</a>
+    
+      
+  
+    <!-- If logged-in user has a USER role -->
+    
+  </div>
+  
+</nav>
+
+<br>
+
+<header class="site-logo">
+  <h1>busk<i>E</i>t 🍴</h1>
+</header>
+
+ <section class="main">
+   <img src="\assets\food_logo.jfif" alt="Delicious Food">
+   <h1>{{ title }}</h1>
+   <p>{{ description }}</p>
+   
+   
+ </section>
+ <app-footer></app-footer>
+ 

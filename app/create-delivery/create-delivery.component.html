@@ -1,0 +1,34 @@
+
+<app-ag-nav></app-ag-nav>
+<div class="container mt-4">
+    <h2>Create New Delivery</h2>
+    <form (ngSubmit)="createDelivery()">
+      <div class="mb-3">
+        <label for="orderId" class="form-label">Order ID:</label>
+        <input type="number" id="orderId" [(ngModel)]="newDelivery.orderId" name="orderId" required class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="agentId" class="form-label">Agent ID:</label>
+        <input type="number" id="agentId" [(ngModel)]="newDelivery.agentId" name="agentId" required class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="estimatedTimeOfArrival" class="form-label">Estimated Arrival:</label>
+        <input type="datetime-local" id="estimatedTimeOfArrival" [(ngModel)]="newDelivery.estimatedTimeOfArrival" name="estimatedTimeOfArrival" required class="form-control">
+        <small class="form-text text-muted">Select date and time</small>
+      </div>
+      <div class="mb-3">
+        <label for="status" class="form-label">Status:</label>
+        <select id="status" [(ngModel)]="newDelivery.status" name="status" required class="form-control">
+          <option value="" disabled selected>Select Status</option>
+          <option *ngFor="let status of deliveryStatuses" [value]="status">{{ status }}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>
+        Create Delivery
+      </button>
+      <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+    </form>
+  </div>
+  <br>
+  <app-footer></app-footer>
